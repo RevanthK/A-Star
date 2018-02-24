@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-
 public class AStar {
     
     // two dimensional array, think rows and columns
@@ -13,25 +12,22 @@ public class AStar {
     
     String totalPathLength = "";
     
-  
-    //ArrayList<String> pathTiles = new ArrayList<String>();
+    boolean empty = false;
+    
+    // ArrayList<String> pathTiles = new ArrayList<String>();
     int size = 100;
     
-    void search(Tile start, Tile target) {
+    boolean search(Tile start, Tile target) {
         
         do {
             // if (start.equals(target)){
-        
+            
             if (start.x == size && start.y == size) {//
                 start.path = start.path + start.x + "," + start.y + "\n";
-                //changed from: start.path += " Path Length = " + start.pathLength;
+                // changed from: start.path += " Path Length = " +
+                // start.pathLength;
                 totalPathLength = "Path Length = " + start.pathLength;
-                return;
-            }
-            
-            if (tq.getSize() == 0) {
-            		System.out.println("path is blocked, cannot be reached");
-            		return;
+                return true;
             }
             
             System.out.println(" tile: " + start.pathLength + " " + start.x
@@ -50,6 +46,13 @@ public class AStar {
                     t.path = start.path + start.x + "," + start.y + "\n";
                     t.pathLength = start.pathLength + 1;
                 }
+            }
+            
+            if (tq.getSize() == 0) {
+                
+                System.out.println("path is blocked, cannot be reached");
+                writeToFile(start.path);
+                return false;              
             }
             
             start = tq.pop();
@@ -122,7 +125,7 @@ public class AStar {
             int col = 0;
             for (String s : line) {
                 Double d = Double.valueOf(s);
-                boolean isBlocked = (d > .9);
+                boolean isBlocked = (d >= .9);
                 rects[row][col] = new Tile(row, col, isBlocked);
                 
                 col++;
@@ -133,33 +136,30 @@ public class AStar {
         // after loop, close scanner
         inputStream.close();
         
-        System.out.println(rects[0][0].pathLength);
-        
         rects[0][0].pathLength = 0;
         rects[0][0].searched = true;
-        search(rects[0][0], rects[size][size]);
-        System.out.print("\n" + rects[size][size].path);
-        writeToFile(rects[size][size].path);
+        if (search(rects[0][0], rects[size][size])) {
+            System.out.print("\n" + rects[size][size].path);
+            writeToFile(rects[size][size].path);
+        } else {
+            // blocked
+        }
         
     }
     
-    
-    public static void writeToFile(String toWrite) 
-	{
-    	
-    		File file = new File("AStar.csv");
-		if(!file.delete()) {
-			System.out.println("no file data present, creating CSV.");
-		}
-		try 
-		{
-			FileWriter writer = new FileWriter("AStar.csv", true);
-			writer.write(toWrite);
-			writer.close();
-		}catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-	}
+    public static void writeToFile(String toWrite) {
+        
+        File file = new File("Path.csv");
+        if (!file.delete()) {
+            System.out.println("no file data present, creating CSV.");
+        }
+        try {
+            FileWriter writer = new FileWriter("Path.csv", true);
+            writer.write(toWrite);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
 }

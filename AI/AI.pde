@@ -1,11 +1,11 @@
-Tile[][] rects; // twodimensional array, think rows and columns //<>//
+Tile[][] rects; // twodimensional array, think rows and columns //<>// //<>//
 TileQueue tq;
 
-int size = 50;
+int size = 100;
 
 Table table;
 
-void readData() {
+void readMaze() {
 
   table = loadTable("RandomMaze1.csv");
 
@@ -22,6 +22,20 @@ void readData() {
   }
 }
 
+void readPath(){
+  
+  table = loadTable("Path.csv");
+   
+  
+  for(int i=0;i<=size*2;i++){
+     println(table.getInt(i,0) + " " +  table.getInt(i,1));
+     rects[table.getInt(i,0)][table.getInt(i,1)].searched = true;  
+  }
+  
+  
+  
+}
+
 
 void setup ()
 {
@@ -32,25 +46,12 @@ void setup ()
   rects = new Tile[size+1][size+1];
   tq = new TileQueue();
 
-  readData();
-  /*
-    for (int r=0; r<101; r++) // rows
-   {
-   for (int c=0; c<101; c++) // columns per row
-   {
-   if(random(1) > .9){       
-   rects[r][c] = new Tile(r,c, true);
-   tq.push(rects[r][c]);
-   }
-   else
-   rects[r][c] = new Tile(r,c, false);
-   }
-   
-   }
-   */
-   rects[0][0].pathLength = 0;
-   search(rects[0][0], rects[size][size]);
-   print("\n" + rects[size][size].path);
+  readMaze();
+  readPath();
+
+  //rects[0][0].pathLength = 0;
+  //search(rects[0][0], rects[size][size]);
+  //print("\n" + rects[size][size].path);
 }
 
 void draw ()
@@ -75,36 +76,36 @@ void draw ()
 }
 
 void search(Tile start, Tile target) {
-  
-  //if (start.equals(target)){    //<>//
-  if(start.x == size && start.y == size){//
-     start.path = start.path + "->" + start.x + "," + start.y;
-     start.path += " Path Length = " + start.pathLength;
-     return;
+
+  //if (start.equals(target)){   
+  if (start.x == size && start.y == size) {//
+    start.path = start.path + "->" + start.x + "," + start.y;
+    start.path += " Path Length = " + start.pathLength;
+    return;
   }
-  
-  
+
+
   print(" tile: " + start.pathLength + " " + start.x + " " + start.y);
 
   Tile[] neighbors = getNeighbors(start);
 
   for (Tile t : neighbors) {
-    
-    
-    
+
+
+
     //if ((t.x+t.y)>(start.x+start.y) && t.blocked == false){      
-    if (t.searched != true && t.blocked == false){
+    if (t.searched != true && t.blocked == false) {
       tq.push(t);
       t.searched = true;
     }
-    if(t.pathLength > start.pathLength){
-     t.path = start.path + "->" + start.x + "," + start.y;
-     t.pathLength = start.pathLength+1; 
+    if (t.pathLength > start.pathLength) {
+      t.path = start.path + "->" + start.x + "," + start.y;
+      t.pathLength = start.pathLength+1;
     }
   }
-  
-  
-  if(tq.getSize() != 0)
+
+
+  if (tq.getSize() != 0)
     search(tq.pop(), target);
   else
     print("No path");

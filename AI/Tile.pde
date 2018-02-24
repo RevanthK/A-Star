@@ -26,7 +26,7 @@ class Tile {
       fill(255, 0, 0);
     else
       if (searched)
-        fill(0, 0, 255);
+        fill(0, 230, 230);
 
     rect(x*7+21, y*7+21, 5, 5);
   } 
