@@ -21,11 +21,17 @@ public class AStar {
         
         do {
             // if (start.equals(target)){
+        
             if (start.x == size && start.y == size) {//
                 start.path = start.path + start.x + "," + start.y + "\n";
                 //changed from: start.path += " Path Length = " + start.pathLength;
                 totalPathLength = "Path Length = " + start.pathLength;
                 return;
+            }
+            
+            if (tq.getSize() == 0) {
+            		System.out.println("path is blocked, cannot be reached");
+            		return;
             }
             
             System.out.println(" tile: " + start.pathLength + " " + start.x

@@ -2,6 +2,8 @@ public class Tile {
   boolean blocked;
   int x, y;
   boolean searched;
+  
+  
   public int pathLength = Integer.MAX_VALUE;
   String path = "";
 
