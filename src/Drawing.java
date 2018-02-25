@@ -7,7 +7,6 @@ import processing.data.Table;
 public class Drawing extends PApplet{
     
     Tile[][] rects; // twodimensional array, think rows and columns
-    TileQueue tq;
 
     int size;
     
@@ -73,7 +72,6 @@ public class Drawing extends PApplet{
         size = table.getInt(0, 0);
         
         rects = new Tile[size+1][size+1];
-        tq = new TileQueue();
 
         readMaze();
         readPath();

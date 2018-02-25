@@ -2,13 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class AStar {
     
     // two dimensional array, think rows and columns
     Tile[][] rects; //= new Tile[size+1][size+1];
-    TileQueue tq = new TileQueue();
+    BinaryHeap tq = new BinaryHeap();
+    //Queue<Tile> tq = new PriorityQueue<Tile>(); 
     
     String totalPathLength = "";
     
@@ -40,7 +43,10 @@ public class AStar {
                 
                 // if ((t.x+t.y)>(start.x+start.y) && t.blocked == false){
                 if (t.searched != true && t.blocked == false) {
+                    t.g = start.g+1;
+                    t.H(size);
                     tq.push(t);
+                    //tq.add(t);
                     t.searched = true;
                 }
                 if (t.pathLength > start.pathLength) {
@@ -49,14 +55,15 @@ public class AStar {
                 }
             }
             
-            if (tq.getSize() == 0) {
+            if (tq.size() == 0) {
                 
                 System.out.println("path is blocked, cannot be reached");
                 writeToFile(start.path);
                 return false;              
             }
             
-            start = tq.pop();
+            start = (Tile) tq.pop();
+            //start = (Tile) tq.remove();
         } while (true);
     }
     
