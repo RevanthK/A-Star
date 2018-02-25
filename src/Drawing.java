@@ -1,38 +1,44 @@
+import java.io.FileNotFoundException;
+
 import processing.core.PApplet;
 import processing.data.Table;
+
 
 public class Drawing extends PApplet{
     
     Tile[][] rects; // twodimensional array, think rows and columns
     TileQueue tq;
 
-    int size = 100;
+    int size;
+    
 
     Table table;
 
     void readMaze() {
-
-        table = loadTable("RandomMaze1.csv");
+    
+        table = loadTable(AStar.filename);
+        
 
         for (int r=0; r<=size; r++) // rows
         {
           for (int c=0; c<=size; c++) // columns per row
           {
-            if (table.getFloat(r, c) > .9) {       
-              rects[r][c] = new Tile(r, c, true);
+            if (table.getFloat(r, c) >= .9) {       
+              rects[c][r] = new Tile(c, r, true);
               //tq.push(rects[r][c]);
             } else
-              rects[r][c] = new Tile(r, c, false);
+              rects[c][r] = new Tile(c, r, false);
           }
         }
       }
 
       void readPath(){
-        
+         
         table = loadTable("Path.csv");
+
          
         
-        for(int i=0;i<=size*2;i++){
+        for(int i=1;i<table.getRowCount();i++){
            println(table.getInt(i,0) + " " +  table.getInt(i,1));
            rects[table.getInt(i,0)][table.getInt(i,1)].searched = true;  
         }
@@ -47,6 +53,13 @@ public class Drawing extends PApplet{
     }
 
     public void settings(){
+        AStar ass = new AStar();
+        try {
+            ass.run();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         size(750, 750);
     }
 
@@ -55,11 +68,17 @@ public class Drawing extends PApplet{
         fill(0);
         noStroke();
 
+        table = loadTable("Path.csv");
+        
+        size = table.getInt(0, 0);
+        
         rects = new Tile[size+1][size+1];
         tq = new TileQueue();
 
         readMaze();
         readPath();
+
+
     }
 
     public void draw(){
@@ -68,7 +87,7 @@ public class Drawing extends PApplet{
         {
           for (int c=0; c<=size; c++) // columns per row
           {
-            update(rects[r][c]);
+            update(rects[c][r]);
           }
         }
     }
@@ -81,7 +100,7 @@ public class Drawing extends PApplet{
           fill(255, 0, 0);
         else
           if (t.searched)
-            fill(0, 0, 255);
+            fill(0, 230, 230);
 
         rect(t.x*7+21, t.y*7+21, 5, 5);
       } 

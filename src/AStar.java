@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class AStar {
     
     // two dimensional array, think rows and columns
-    Tile[][] rects = new Tile[101][101];
+    Tile[][] rects; //= new Tile[size+1][size+1];
     TileQueue tq = new TileQueue();
     
     String totalPathLength = "";
@@ -15,7 +15,8 @@ public class AStar {
     boolean empty = false;
     
     // ArrayList<String> pathTiles = new ArrayList<String>();
-    int size = 100;
+    static int size;// = 4;
+    static String filename = "RandomMaze1.csv";
     
     boolean search(Tile start, Tile target) {
         
@@ -110,7 +111,7 @@ public class AStar {
     public void run() throws FileNotFoundException {
         // TODO Auto-generated method stub
         
-        String fileNameDefined = "RandomMaze1.csv";
+        String fileNameDefined = filename;
         // -File class needed to turn stringName to actual file
         File file = new File(fileNameDefined);
         
@@ -122,11 +123,15 @@ public class AStar {
             // read single line, put in string
             String data = inputStream.next();
             String[] line = data.split(",");
+            size = line.length - 1;
+            if(row == 0)
+                rects = new Tile[line.length][line.length];
+            
             int col = 0;
             for (String s : line) {
                 Double d = Double.valueOf(s);
                 boolean isBlocked = (d >= .9);
-                rects[row][col] = new Tile(row, col, isBlocked);
+                rects[col][row] = new Tile(col, row, isBlocked);
                 
                 col++;
                 
@@ -155,6 +160,7 @@ public class AStar {
         }
         try {
             FileWriter writer = new FileWriter("Path.csv", true);
+            writer.write(size + "\n");         
             writer.write(toWrite);
             writer.close();
         } catch (IOException e) {
