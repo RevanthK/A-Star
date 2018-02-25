@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class AStar {
+public class BackwardsAStar {
     
     // two dimensional array, think rows and columns
     Tile[][] rects; //= new Tile[size+1][size+1];
@@ -24,7 +24,7 @@ public class AStar {
         do {
             // if (start.equals(target)){
             
-            if (start.x == size && start.y == size) {//
+            if (start.x == 0 && start.y == 0) {//
                 start.path = start.path + start.x + "," + start.y + "\n";
                 // changed from: start.path += " Path Length = " +
                 // start.pathLength;
@@ -44,7 +44,7 @@ public class AStar {
                 // if ((t.x+t.y)>(start.x+start.y) && t.blocked == false){
                 if (t.searched != true && t.blocked == false) {
                     t.g = start.g+1;
-                    t.H(size, true);
+                    t.H(size, false);
                     tq.push(t);
                     //tq.add(t);
                     t.searched = true;
@@ -148,8 +148,8 @@ public class AStar {
         // after loop, close scanner
         inputStream.close();
         
-        Tile begin = rects[0][0];
-        Tile target = rects[size][size];
+        Tile begin = rects[size][size];
+        Tile target = rects[0][0];
         begin.pathLength = 0;
         begin.searched = true;
         long startTime = System.nanoTime();
@@ -157,7 +157,7 @@ public class AStar {
             //System.out.print("\n" + target.path);
             long endTime   = System.nanoTime();
             long totalTime = endTime - startTime;
-            System.out.println("Forward A Star: " + (totalTime/1000000000.0) + " seconds");
+            System.out.println("Backwards A Star: " + (totalTime/1000000000.0) + " seconds");
             writeToFile(target.path);
         } else {
             // blocked

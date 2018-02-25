@@ -2,6 +2,7 @@ public class Tile implements Comparable {
     boolean blocked;
     int x, y;
     boolean searched;
+    //delete if not needed
     
     int f, g, h;
     
@@ -50,8 +51,9 @@ public class Tile implements Comparable {
         return false;
     }
     
-    void H(int size){
-        h = size-x + size-y;
+    void H(int size, boolean forwards){
+        if (forwards) h = size-x + size-y;
+        else h = x + y;
         F();
     }
     

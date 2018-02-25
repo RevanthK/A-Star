@@ -38,7 +38,7 @@ public class Drawing extends PApplet{
          
         
         for(int i=1;i<table.getRowCount();i++){
-           println(table.getInt(i,0) + " " +  table.getInt(i,1));
+           //println(table.getInt(i,0) + " " +  table.getInt(i,1));
            rects[table.getInt(i,0)][table.getInt(i,1)].searched = true;  
         }
         
@@ -53,12 +53,17 @@ public class Drawing extends PApplet{
 
     public void settings(){
         AStar ass = new AStar();
+        //BackwardsAStar ass = new BackwardsAStar();
+
         try {
             ass.run();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+        
+        
         size(750, 750);
     }
 
