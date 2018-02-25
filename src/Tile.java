@@ -1,4 +1,4 @@
-public class Tile { 
+public class Tile{ 
   boolean blocked;
   int x, y;
   boolean searched;
@@ -21,18 +21,7 @@ public class Tile {
     this.blocked = blocked;
     searched = false;
   }
-/*
-  void update() { 
-    fill(0);
-    if (blocked)
-      fill(255, 0, 0);
-    else
-      if (searched)
-        fill(0, 0, 255);
 
-    rect(x*7+21, y*7+21, 5, 5);
-  } 
-*/
   boolean isBlocked() {
     return blocked;
   }
