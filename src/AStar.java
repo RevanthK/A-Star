@@ -17,7 +17,7 @@ public class AStar {
     
     // ArrayList<String> pathTiles = new ArrayList<String>();
     static int size;// = 4;
-    static String filename = "RandomMaze4.csv";
+    static String filename = "RandomMaze5.csv";
     
     boolean search(Tile start, Tile target) {
         

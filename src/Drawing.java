@@ -52,8 +52,8 @@ public class Drawing extends PApplet{
     }
 
     public void settings(){
-        AStar ass = new AStar();
-        //BackwardsAStar ass = new BackwardsAStar();
+        //AStar ass = new AStar();
+        BackwardsAStar ass = new BackwardsAStar();
 
         try {
             ass.run();

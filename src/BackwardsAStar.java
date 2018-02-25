@@ -32,6 +32,13 @@ public class BackwardsAStar {
                 return true;
             }
             
+            
+            if (start.x == size && start.y == size && start.isBlocked()) {
+            		System.out.println("path is blocked, cannot be reached");
+                writeToFile(start.path);
+                return false;        
+            }
+            
             /*
             System.out.println(" tile: " + start.pathLength + " " + start.x
                     + " " + start.y);
