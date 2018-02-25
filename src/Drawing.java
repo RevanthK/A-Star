@@ -22,7 +22,7 @@ public class Drawing extends PApplet{
         {
           for (int c=0; c<=size; c++) // columns per row
           {
-            if (table.getFloat(r, c) >= .9) {       
+            if (table.getFloat(r, c) >= .8) {       
               rects[c][r] = new Tile(c, r, true);
               //tq.push(rects[r][c]);
             } else

@@ -19,7 +19,7 @@ public class AStar {
     
     // ArrayList<String> pathTiles = new ArrayList<String>();
     static int size;// = 4;
-    static String filename = "RandomMaze1.csv";
+    static String filename = "RandomMaze4.csv";
     
     boolean search(Tile start, Tile target) {
         
@@ -137,7 +137,7 @@ public class AStar {
             int col = 0;
             for (String s : line) {
                 Double d = Double.valueOf(s);
-                boolean isBlocked = (d >= .9);
+                boolean isBlocked = (d >= .8);
                 rects[col][row] = new Tile(col, row, isBlocked);
                 
                 col++;
