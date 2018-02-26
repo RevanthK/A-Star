@@ -14,13 +14,15 @@ public class AdaptiveAStar {
     String totalPathLength = "";
     
     boolean empty = false;
+    int pathlength = 0;
     
     // ArrayList<String> pathTiles = new ArrayList<String>();
     static int size;// = 4;
     
-    public AdaptiveAStar(Tile[][] rects, int size) {
+    public AdaptiveAStar(Tile[][] rects, int size, int pathlength) {
         this.rects = rects;
         this.size = size;
+        this.pathlength = pathlength;
     }
     
     boolean search(Tile start, Tile target) {
@@ -47,8 +49,8 @@ public class AdaptiveAStar {
                 
                 // if ((t.x+t.y)>(start.x+start.y) && t.blocked == false){
                 if (t.found != true && t.blocked == false) {
-                    t.Hnew(size);
-                    t.g = start.g+1;                    
+                    t.g = start.g+1; 
+                    t.Hnew(pathlength, size);                  
                     tq.push(t);
                     //tq.add(t);
                     t.found = true;
@@ -56,6 +58,7 @@ public class AdaptiveAStar {
                 if (t.pathLength > start.pathLength+1) {
                     t.path = start.path + start.x + "," + start.y + "\n";
                     t.pathLength = start.pathLength + 1;
+                    
                 }
             }
             

@@ -75,9 +75,9 @@ public class Tile implements Comparable {
     void F(int h){
         f = g+h;       
     }
-    
-    void Hnew(int pathLength){
-        this.hNew = pathLength - this.pathLength;
+   
+    void Hnew(int pathLength, int size){
+        this.hNew = pathLength - (2*size) + this.h;
         F(hNew);
     }
     

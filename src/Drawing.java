@@ -81,26 +81,38 @@ public class Drawing extends PApplet{
             e.printStackTrace();
         }  
         
-        for(int i=0; i<size; i++){
-            for(int j=0; j<size; j++){
+           
+       // readPath();
+        
+        int pl = rects[size][size].pathLength;
+     
+        
+        for(int i=0; i<=size; i++){
+            for(int j=0; j<=size; j++){
                 rects[i][j].found = false;
                 rects[i][j].searched = false;
+                rects[i][j].g = 0;
+                rects[i][j].h = 0;
+                rects[i][j].f = 0;
+                rects[i][j].pathLength = Integer.MAX_VALUE;
+                rects[i][j].hNew = 0;
+                rects[i][j].path = "";
             }
         }
         
-        
-        AdaptiveAStar Ad = new AdaptiveAStar(rects, size);
+                
+        AdaptiveAStar A2 = new AdaptiveAStar(rects, size, pl);
         //BackwardsAStar A = new BackwardsAStar(rects, size);
 
         try {
-            Ad.run();
+            A2.run();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }  
         
         readPath();
-
+        
         System.out.println(rects[size][size].pathLength + " steps");
         System.out.println("Found: " + A.foundCounter);
         
