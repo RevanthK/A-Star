@@ -13,11 +13,12 @@ public class AStar {
     
     String totalPathLength = "";
     
+    int foundCounter = 0;
+    
     boolean empty = false;
     
     // ArrayList<String> pathTiles = new ArrayList<String>();
-    static int size;// = 4;
-    static String filename = "RandomMaze4.csv";
+    int size;// = 4;
     
     public AStar(Tile[][] rects, int size) {
         this.rects = rects;
@@ -53,8 +54,9 @@ public class AStar {
                     tq.push(t);
                     //tq.add(t);
                     t.found = true;
+                    foundCounter++;
                 }
-                if (t.pathLength > start.pathLength) {
+                if (t.pathLength > start.pathLength+1) {
                     t.path = start.path + start.x + "," + start.y + "\n";
                     t.pathLength = start.pathLength + 1;
                 }
@@ -171,7 +173,7 @@ public class AStar {
         
     }
     
-    public static void writeToFile(String toWrite) {
+    public void writeToFile(String toWrite) {
         
         File file = new File("Path.csv");
         if (!file.delete()) {

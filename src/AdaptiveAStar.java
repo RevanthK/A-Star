@@ -17,7 +17,11 @@ public class AdaptiveAStar {
     
     // ArrayList<String> pathTiles = new ArrayList<String>();
     static int size;// = 4;
-    static String filename = "RandomMaze5.csv";
+    
+    public AdaptiveAStar(Tile[][] rects, int size) {
+        this.rects = rects;
+        this.size = size;
+    }
     
     boolean search(Tile start, Tile target) {
         
@@ -42,14 +46,14 @@ public class AdaptiveAStar {
             for (Tile t : neighbors) {
                 
                 // if ((t.x+t.y)>(start.x+start.y) && t.blocked == false){
-                if (t.searched != true && t.blocked == false) {
-                    t.g = start.g+1;
-                    t.H(size, true);
+                if (t.found != true && t.blocked == false) {
+                    t.Hnew(size);
+                    t.g = start.g+1;                    
                     tq.push(t);
                     //tq.add(t);
-                    t.searched = true;
+                    t.found = true;
                 }
-                if (t.pathLength > start.pathLength) {
+                if (t.pathLength > start.pathLength+1) {
                     t.path = start.path + start.x + "," + start.y + "\n";
                     t.pathLength = start.pathLength + 1;
                 }
@@ -116,48 +120,17 @@ public class AdaptiveAStar {
     }
     
     public void run() throws FileNotFoundException {
-        // TODO Auto-generated method stub
-        
-        String fileNameDefined = filename;
-        // -File class needed to turn stringName to actual file
-        File file = new File(fileNameDefined);
-        
-        // -read from filePooped with Scanner class
-        Scanner inputStream = new Scanner(file);
-        int row = 0;
-        // hashNext() loops line-by-line
-        while (inputStream.hasNext()) {
-            // read single line, put in string
-            String data = inputStream.next();
-            String[] line = data.split(",");
-            size = line.length - 1;
-            if(row == 0)
-                rects = new Tile[line.length][line.length];
-            
-            int col = 0;
-            for (String s : line) {
-                Double d = Double.valueOf(s);
-                boolean isBlocked = (d >= .8);
-                rects[col][row] = new Tile(col, row, isBlocked);
-                
-                col++;
-                
-            }
-            row++;
-        }
-        // after loop, close scanner
-        inputStream.close();
         
         Tile begin = rects[0][0];
         Tile target = rects[size][size];
         begin.pathLength = 0;
-        begin.searched = true;
+        begin.found = true;
         long startTime = System.nanoTime();
         if (search(begin, target)) {
             //System.out.print("\n" + target.path);
             long endTime   = System.nanoTime();
             long totalTime = endTime - startTime;
-            System.out.println("Forward A Star: " + (totalTime/1000000000.0) + " seconds");
+            System.out.println("Adaptive A Star: " + (totalTime/1000000000.0) + " seconds");
             writeToFile(target.path);
         } else {
             // blocked
@@ -167,12 +140,12 @@ public class AdaptiveAStar {
     
     public static void writeToFile(String toWrite) {
         
-        File file = new File("Path.csv");
+        File file = new File("Path2.csv");
         if (!file.delete()) {
             System.out.println("no file data present, creating CSV.");
         }
         try {
-            FileWriter writer = new FileWriter("Path.csv", true);
+            FileWriter writer = new FileWriter("Path2.csv", true);
             writer.write(size + "\n");         
             writer.write(toWrite);
             writer.close();

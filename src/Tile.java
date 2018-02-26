@@ -4,7 +4,7 @@ public class Tile implements Comparable {
     boolean searched, found;
     //delete if not needed
     
-    int f, g, h;
+    int f, g, h, hNew;
     
     public int pathLength = Integer.MAX_VALUE;
     String path = "";
@@ -64,16 +64,21 @@ public class Tile implements Comparable {
     void H(int size, boolean forwards){
         if (forwards) h = size-x + size-y;
         else h = x + y;
-        F();
+        F(h);
     }
     
     void G(int g){
         this.g = g; 
-        F();
+        F(h);
     }
     
-    void F(){
+    void F(int h){
         f = g+h;       
+    }
+    
+    void Hnew(int pathLength){
+        this.hNew = pathLength - this.pathLength;
+        F(hNew);
     }
     
     @Override
@@ -84,6 +89,7 @@ public class Tile implements Comparable {
         if(this.f > t.f)
             return 1;
         if(this.f == t.f) {
+//part 2
         		/*
         		if(this.g > t.g) {
         			//return 1;

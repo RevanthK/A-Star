@@ -34,7 +34,7 @@ public class Drawing extends PApplet{
 
       void readPath(){
          
-        table = loadTable("Path.csv");        
+        table = loadTable("Path2.csv");        
         
         for(int i=1;i<table.getRowCount();i++){
            //println(table.getInt(i,0) + " " +  table.getInt(i,1));
@@ -71,8 +71,8 @@ public class Drawing extends PApplet{
         
         readMaze();
         
-        //AStar A = new AStar(rects, size);
-        BackwardsAStar A = new BackwardsAStar(rects, size);
+        AStar A = new AStar(rects, size);
+        //BackwardsAStar A = new BackwardsAStar(rects, size);
 
         try {
             A.run();
@@ -80,10 +80,29 @@ public class Drawing extends PApplet{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }  
+        
+        for(int i=0; i<size; i++){
+            for(int j=0; j<size; j++){
+                rects[i][j].found = false;
+                rects[i][j].searched = false;
+            }
+        }
+        
+        
+        AdaptiveAStar Ad = new AdaptiveAStar(rects, size);
+        //BackwardsAStar A = new BackwardsAStar(rects, size);
 
-
+        try {
+            Ad.run();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }  
+        
         readPath();
-        System.out.println(counter + " steps");
+
+        System.out.println(rects[size][size].pathLength + " steps");
+        System.out.println("Found: " + A.foundCounter);
         
     }
 
