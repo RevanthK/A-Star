@@ -1,7 +1,7 @@
 public class Tile implements Comparable {
     boolean blocked;
     int x, y;
-    boolean searched;
+    boolean searched, found;
     //delete if not needed
     
     int f, g, h;
@@ -14,6 +14,7 @@ public class Tile implements Comparable {
         this.y = y;
         blocked = false;
         searched = false;
+        found = false;
         f = 0;
         g = 0;
         h = 0;
@@ -24,6 +25,7 @@ public class Tile implements Comparable {
         this.y = y;
         this.blocked = blocked;
         searched = false;
+        found = false;
         f = 0;
         g = 0;
         h = 0;
@@ -42,6 +44,14 @@ public class Tile implements Comparable {
     }
     
     void setSearch(boolean b) {
+        searched = b;
+    }
+    
+    boolean isFound() {
+        return searched;
+    }
+    
+    void setFound(boolean b) {
         searched = b;
     }
     

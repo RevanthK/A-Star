@@ -9,13 +9,14 @@ public class Drawing extends PApplet{
     Tile[][] rects; // twodimensional array, think rows and columns
 
     int size;
-    
+    String filename = "RandomMaze4.csv";
+    int counter = 0;
 
     Table table;
 
     void readMaze() {
     
-        table = loadTable(AStar.filename);
+        table = loadTable(filename);
         
 
         for (int r=0; r<=size; r++) // rows
@@ -33,16 +34,15 @@ public class Drawing extends PApplet{
 
       void readPath(){
          
-        table = loadTable("Path.csv");
-
-         
+        table = loadTable("Path.csv");        
         
         for(int i=1;i<table.getRowCount();i++){
            //println(table.getInt(i,0) + " " +  table.getInt(i,1));
-           rects[table.getInt(i,0)][table.getInt(i,1)].searched = true;  
+           rects[table.getInt(i,0)][table.getInt(i,1)].searched = true; 
+           counter++;
+           //System.out.println(counter);
         }
-        
-        
+          
         
       }
     
@@ -52,17 +52,6 @@ public class Drawing extends PApplet{
     }
 
     public void settings(){
-        //AStar ass = new AStar();
-        BackwardsAStar ass = new BackwardsAStar();
-
-        try {
-            ass.run();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-        
         
         size(750, 750);
     }
@@ -76,12 +65,26 @@ public class Drawing extends PApplet{
         
         size = table.getInt(0, 0);
         
+        //size = 100;
+        
         rects = new Tile[size+1][size+1];
-
+        
         readMaze();
+        
+        //AStar A = new AStar(rects, size);
+        BackwardsAStar A = new BackwardsAStar(rects, size);
+
+        try {
+            A.run();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }  
+
+
         readPath();
-
-
+        System.out.println(counter + " steps");
+        
     }
 
     public void draw(){
@@ -98,13 +101,17 @@ public class Drawing extends PApplet{
     
     
     void update(Tile t) { 
+       
         fill(0);
         if (t.blocked)
-          fill(255, 0, 0);
-        else
-          if (t.searched)
-            fill(0, 230, 230);
-
+          fill(255, 0, 0);       
+        else{
+          if (t.found)
+            fill(0, 200, 200);
+          if(t.searched)
+              fill(0,255,0);
+        }
+        
         rect(t.x*7+21, t.y*7+21, 5, 5);
       } 
 

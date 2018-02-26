@@ -17,8 +17,13 @@ public class AStar {
     
     // ArrayList<String> pathTiles = new ArrayList<String>();
     static int size;// = 4;
-    static String filename = "RandomMaze5.csv";
+    static String filename = "RandomMaze4.csv";
     
+    public AStar(Tile[][] rects, int size) {
+        this.rects = rects;
+        this.size = size;
+    }
+
     boolean search(Tile start, Tile target) {
         
         do {
@@ -42,12 +47,12 @@ public class AStar {
             for (Tile t : neighbors) {
                 
                 // if ((t.x+t.y)>(start.x+start.y) && t.blocked == false){
-                if (t.searched != true && t.blocked == false) {
+                if (t.found != true && t.blocked == false) {
                     t.g = start.g+1;
                     t.H(size, true);
                     tq.push(t);
                     //tq.add(t);
-                    t.searched = true;
+                    t.found = true;
                 }
                 if (t.pathLength > start.pathLength) {
                     t.path = start.path + start.x + "," + start.y + "\n";
@@ -116,6 +121,7 @@ public class AStar {
     }
     
     public void run() throws FileNotFoundException {
+        /*
         // TODO Auto-generated method stub
         
         String fileNameDefined = filename;
@@ -137,7 +143,7 @@ public class AStar {
             int col = 0;
             for (String s : line) {
                 Double d = Double.valueOf(s);
-                boolean isBlocked = (d >= .8);
+                boolean isBlocked = (d >= 0.8);
                 rects[col][row] = new Tile(col, row, isBlocked);
                 
                 col++;
@@ -147,11 +153,11 @@ public class AStar {
         }
         // after loop, close scanner
         inputStream.close();
-        
+        */
         Tile begin = rects[0][0];
         Tile target = rects[size][size];
         begin.pathLength = 0;
-        begin.searched = true;
+        begin.found = true;
         long startTime = System.nanoTime();
         if (search(begin, target)) {
             //System.out.print("\n" + target.path);

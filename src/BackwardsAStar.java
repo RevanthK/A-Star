@@ -19,6 +19,11 @@ public class BackwardsAStar {
     static int size;// = 4;
     static String filename = "RandomMaze4.csv";
     
+    public BackwardsAStar(Tile[][] rects, int size) {
+        this.rects = rects;
+        this.size = size;
+    }
+    
     boolean search(Tile start, Tile target) {
         
         do {
@@ -49,12 +54,12 @@ public class BackwardsAStar {
             for (Tile t : neighbors) {
                 
                 // if ((t.x+t.y)>(start.x+start.y) && t.blocked == false){
-                if (t.searched != true && t.blocked == false) {
+                if (t.found != true && t.blocked == false) {
                     t.g = start.g+1;
                     t.H(size, false);
                     tq.push(t);
                     //tq.add(t);
-                    t.searched = true;
+                    t.found = true;
                 }
                 if (t.pathLength > start.pathLength) {
                     t.path = start.path + start.x + "," + start.y + "\n";
@@ -123,6 +128,7 @@ public class BackwardsAStar {
     }
     
     public void run() throws FileNotFoundException {
+        /*
         // TODO Auto-generated method stub
         
         String fileNameDefined = filename;
@@ -146,7 +152,7 @@ public class BackwardsAStar {
                 Double d = Double.valueOf(s);
                 boolean isBlocked = (d >= .8);
                 rects[col][row] = new Tile(col, row, isBlocked);
-                
+                if (row == 100 && col == 100) System.out.println("100,100 is blocked: " + isBlocked);
                 col++;
                 
             }
@@ -154,11 +160,11 @@ public class BackwardsAStar {
         }
         // after loop, close scanner
         inputStream.close();
-        
+        */
         Tile begin = rects[size][size];
         Tile target = rects[0][0];
         begin.pathLength = 0;
-        begin.searched = true;
+        begin.found = true;
         long startTime = System.nanoTime();
         if (search(begin, target)) {
             //System.out.print("\n" + target.path);
