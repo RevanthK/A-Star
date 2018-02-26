@@ -13,8 +13,8 @@ public class AStar {
     
     String totalPathLength = "";
     
-    int foundCounter = 0;
-    
+    int foundCounter = 1;
+    int hitCounter = 1;
     boolean empty = false;
     
     // ArrayList<String> pathTiles = new ArrayList<String>();
@@ -29,7 +29,7 @@ public class AStar {
         
         do {
             // if (start.equals(target)){
-            
+            hitCounter++;
             if (start.x == size && start.y == size) {//
                 start.path = start.path + start.x + "," + start.y + "\n";
                 // changed from: start.path += " Path Length = " +
@@ -49,7 +49,7 @@ public class AStar {
                 
                 // if ((t.x+t.y)>(start.x+start.y) && t.blocked == false){
                 if (t.found != true && t.blocked == false) {
-                    t.g = start.g+1;
+                    t.G(start.g+1);
                     t.H(size, true);
                     tq.push(t);
                     //tq.add(t);
@@ -59,6 +59,7 @@ public class AStar {
                 if (t.pathLength > start.pathLength+1) {
                     t.path = start.path + start.x + "," + start.y + "\n";
                     t.pathLength = start.pathLength + 1;
+                    t.G(start.g+1);
                 }
             }
             
@@ -158,6 +159,8 @@ public class AStar {
         */
         Tile begin = rects[0][0];
         Tile target = rects[size][size];
+        begin.G(0);
+        begin.H(size, true);
         begin.pathLength = 0;
         begin.found = true;
         long startTime = System.nanoTime();

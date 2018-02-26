@@ -9,7 +9,7 @@ public class Drawing extends PApplet{
     Tile[][] rects; // twodimensional array, think rows and columns
 
     int size;
-    String filename = "RandomMaze4.csv";
+    String filename = "RandomMaze3.csv";
     int counter = 0;
 
     Table table;
@@ -23,7 +23,7 @@ public class Drawing extends PApplet{
         {
           for (int c=0; c<=size; c++) // columns per row
           {
-            if (table.getFloat(r, c) >= .8) {       
+            if (table.getFloat(r, c) >= .9) {       
               rects[c][r] = new Tile(c, r, true);
               //tq.push(rects[r][c]);
             } else
@@ -81,25 +81,46 @@ public class Drawing extends PApplet{
             e.printStackTrace();
         }  
         
-           
+        System.out.println();
+        System.out.println(A.foundCounter + " states expanded initially in AStar");
+        System.out.println(A.hitCounter + " states(hit) expanded initially in AStar");
+        System.out.println();
        // readPath();
         
+        //PL is g*: the path of least cost from start to goal
         int pl = rects[size][size].pathLength;
      
+       
+        int closedListCounter = 0;
         
         for(int i=0; i<=size; i++){
             for(int j=0; j<=size; j++){
+                
+                // System.out.println(rects[i][j].found);
+
+                //in the closed list, set h to g* - g(s)
+                if(rects[i][j].found == true){
+                    closedListCounter++;
+                    rects[i][j].h = pl - rects[i][j].g;
+                    
+                } 
+                else{
+                    rects[i][j].h = size-i + size-j;
+                    
+                }
                 rects[i][j].found = false;
                 rects[i][j].searched = false;
+
                 rects[i][j].g = 0;
-                rects[i][j].h = 0;
                 rects[i][j].f = 0;
+                //System.out.println("updated heuristic: " + rects[i][j].h);
                 rects[i][j].pathLength = Integer.MAX_VALUE;
                 rects[i][j].hNew = 0;
                 rects[i][j].path = "";
             }
         }
         
+       // System.out.println("aaa " + closedListCounter);
                 
         AdaptiveAStar A2 = new AdaptiveAStar(rects, size, pl);
         //BackwardsAStar A = new BackwardsAStar(rects, size);
@@ -112,9 +133,11 @@ public class Drawing extends PApplet{
         }  
         
         readPath();
+        System.out.println();
+        System.out.println(A2.foundCounter + " states expanded in Adaptive A Star");
+        System.out.println(A2.hitCounter + " states(hit) expanded initially in AStar");
         
-        System.out.println(rects[size][size].pathLength + " steps");
-        System.out.println("Found: " + A.foundCounter);
+        
         
     }
 
