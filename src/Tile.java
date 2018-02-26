@@ -73,9 +73,23 @@ public class Tile implements Comparable {
         
         if(this.f > t.f)
             return 1;
-        if(this.f == t.f)    
-            return 0;
-        
+        if(this.f == t.f) {
+        		/*
+        		if(this.g > t.g) {
+        			//return 1;
+        			return -1;
+        		} 
+        		if(this.g == t.g) {
+        			return 0;
+        		}
+        		if(this.g < t.g) {
+        			//return -1;
+        			return 1;
+        		}
+        		*/
+        		return 0;
+
+        }        
         return -1;
     }
 }
