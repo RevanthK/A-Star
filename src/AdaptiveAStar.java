@@ -61,7 +61,7 @@ public class AdaptiveAStar {
                 if (t.pathLength > start.pathLength+1) {
                     t.path = start.path + start.x + "," + start.y + "\n";
                     t.pathLength = start.pathLength + 1;
-                    t.G(start.g+1);
+                    //t.G(start.g+1);
                 }
             }
             
@@ -138,7 +138,7 @@ public class AdaptiveAStar {
             //System.out.print("\n" + target.path);
             long endTime   = System.nanoTime();
             long totalTime = endTime - startTime;
-            System.out.println("Adaptive A Star: " + (totalTime/1000000000.0) + " seconds");
+            //System.out.println("Adaptive A Star: " + (totalTime/1000000000.0) + " seconds");
             writeToFile(target.path);
         } else {
             // blocked

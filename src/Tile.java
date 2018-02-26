@@ -16,7 +16,7 @@ public class Tile implements Comparable {
         searched = false;
         found = false;
         f = 0;
-        g = 0;
+        g = Integer.MAX_VALUE;
         h = 0;
     }
     
@@ -27,7 +27,18 @@ public class Tile implements Comparable {
         searched = false;
         found = false;
         f = 0;
-        g = 0;
+        g = Integer.MAX_VALUE;
+        h = 0;
+    }
+    
+    Tile(int x, int y, boolean blocked, boolean found) {
+        this.x = x;
+        this.y = y;
+        this.blocked = blocked;
+        searched = false;
+        this.found = found;
+        f = 0;
+        g = Integer.MAX_VALUE;
         h = 0;
     }
     

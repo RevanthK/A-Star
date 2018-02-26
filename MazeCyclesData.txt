@@ -1,0 +1,165 @@
+Testcase: 1
+5661 states expanded initially in AStar
+3578 states expanded in Adaptive A Star
+Testcase: 2
+5535 states expanded initially in AStar
+1832 states expanded in Adaptive A Star
+Testcase: 3
+2998 states expanded initially in AStar
+1920 states expanded in Adaptive A Star
+Testcase: 4
+3712 states expanded initially in AStar
+3948 states expanded in Adaptive A Star
+Testcase: 5
+3224 states expanded initially in AStar
+2105 states expanded in Adaptive A Star
+Testcase: 6
+4028 states expanded initially in AStar
+3046 states expanded in Adaptive A Star
+Testcase: 7
+6152 states expanded initially in AStar
+2090 states expanded in Adaptive A Star
+Testcase: 8
+3618 states expanded initially in AStar
+2193 states expanded in Adaptive A Star
+Testcase: 9
+path is blocked, cannot be reached
+1 states expanded initially in AStar
+path is blocked, cannot be reached
+1 states expanded in Adaptive A Star
+Testcase: 10
+4954 states expanded initially in AStar
+1748 states expanded in Adaptive A Star
+Testcase: 11
+3032 states expanded initially in AStar
+2467 states expanded in Adaptive A Star
+Testcase: 12
+7651 states expanded initially in AStar
+4360 states expanded in Adaptive A Star
+Testcase: 13
+4331 states expanded initially in AStar
+4423 states expanded in Adaptive A Star
+Testcase: 14
+4183 states expanded initially in AStar
+4966 states expanded in Adaptive A Star
+Testcase: 15
+4849 states expanded initially in AStar
+1805 states expanded in Adaptive A Star
+Testcase: 16
+2573 states expanded initially in AStar
+2583 states expanded in Adaptive A Star
+Testcase: 17
+4056 states expanded initially in AStar
+6258 states expanded in Adaptive A Star
+Testcase: 18
+8041 states expanded initially in AStar
+3252 states expanded in Adaptive A Star
+Testcase: 19
+path is blocked, cannot be reached
+9212 states expanded initially in AStar
+path is blocked, cannot be reached
+9212 states expanded in Adaptive A Star
+Testcase: 20
+6348 states expanded initially in AStar
+3233 states expanded in Adaptive A Star
+Testcase: 21
+4283 states expanded initially in AStar
+2681 states expanded in Adaptive A Star
+Testcase: 22
+5154 states expanded initially in AStar
+2357 states expanded in Adaptive A Star
+Testcase: 23
+5415 states expanded initially in AStar
+2383 states expanded in Adaptive A Star
+Testcase: 24
+3778 states expanded initially in AStar
+2702 states expanded in Adaptive A Star
+Testcase: 25
+5410 states expanded initially in AStar
+2194 states expanded in Adaptive A Star
+Testcase: 26
+path is blocked, cannot be reached
+9182 states expanded initially in AStar
+path is blocked, cannot be reached
+9182 states expanded in Adaptive A Star
+Testcase: 27
+4214 states expanded initially in AStar
+4000 states expanded in Adaptive A Star
+Testcase: 28
+3233 states expanded initially in AStar
+4281 states expanded in Adaptive A Star
+Testcase: 29
+4294 states expanded initially in AStar
+2554 states expanded in Adaptive A Star
+Testcase: 30
+4238 states expanded initially in AStar
+3392 states expanded in Adaptive A Star
+Testcase: 31
+3536 states expanded initially in AStar
+4376 states expanded in Adaptive A Star
+Testcase: 32
+path is blocked, cannot be reached
+9186 states expanded initially in AStar
+path is blocked, cannot be reached
+9186 states expanded in Adaptive A Star
+Testcase: 33
+6996 states expanded initially in AStar
+2566 states expanded in Adaptive A Star
+Testcase: 34
+3982 states expanded initially in AStar
+3397 states expanded in Adaptive A Star
+Testcase: 35
+path is blocked, cannot be reached
+9189 states expanded initially in AStar
+path is blocked, cannot be reached
+9189 states expanded in Adaptive A Star
+Testcase: 36
+7288 states expanded initially in AStar
+1934 states expanded in Adaptive A Star
+Testcase: 37
+4403 states expanded initially in AStar
+2973 states expanded in Adaptive A Star
+Testcase: 38
+3387 states expanded initially in AStar
+4497 states expanded in Adaptive A Star
+Testcase: 39
+5499 states expanded initially in AStar
+2867 states expanded in Adaptive A Star
+Testcase: 40
+4613 states expanded initially in AStar
+4176 states expanded in Adaptive A Star
+Testcase: 41
+3120 states expanded initially in AStar
+2318 states expanded in Adaptive A Star
+Testcase: 42
+5155 states expanded initially in AStar
+6398 states expanded in Adaptive A Star
+Testcase: 43
+4120 states expanded initially in AStar
+3680 states expanded in Adaptive A Star
+Testcase: 44
+5734 states expanded initially in AStar
+2435 states expanded in Adaptive A Star
+Testcase: 45
+3032 states expanded initially in AStar
+5952 states expanded in Adaptive A Star
+Testcase: 46
+path is blocked, cannot be reached
+9168 states expanded initially in AStar
+path is blocked, cannot be reached
+9168 states expanded in Adaptive A Star
+Testcase: 47
+5862 states expanded initially in AStar
+1795 states expanded in Adaptive A Star
+Testcase: 48
+5493 states expanded initially in AStar
+2895 states expanded in Adaptive A Star
+Testcase: 49
+4845 states expanded initially in AStar
+3158 states expanded in Adaptive A Star
+Testcase: 50
+3925 states expanded initially in AStar
+1106 states expanded in Adaptive A Star
+
+Avg AStar Cycles : 5724.841
+Avg Adaptive Cycles : 4200.273

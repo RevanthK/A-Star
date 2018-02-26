@@ -8,9 +8,16 @@ public class Drawing extends PApplet{
     
     Tile[][] rects; // twodimensional array, think rows and columns
 
+    Tile[][] rectsOrigin;
     int size;
-    String filename = "RandomMaze3.csv";
+    String filename = "RandomMaze1.csv";
+    String fs = "RandomMaze";
+    String fe = ".csv";
     int counter = 0;
+    
+    float AStarTotalTime = 0, AdaptiveTotalTime = 0;
+    float AStarTotalCycles = 0, AdaptiveTotalCycles = 0;
+    
 
     Table table;
 
@@ -57,9 +64,16 @@ public class Drawing extends PApplet{
     }
 
     public void setup(){
-
-        fill(0);
-        noStroke();
+        int counter = 0;
+        
+        while(counter < 50){
+            
+            counter++;
+        
+            System.out.println("Testcase: " + counter);
+            
+            
+        filename = fs + counter + fe;
 
         table = loadTable("Path.csv");
         
@@ -68,6 +82,7 @@ public class Drawing extends PApplet{
         //size = 100;
         
         rects = new Tile[size+1][size+1];
+        rectsOrigin = new Tile[size+1][size+1];
         
         readMaze();
         
@@ -81,15 +96,26 @@ public class Drawing extends PApplet{
             e.printStackTrace();
         }  
         
-        System.out.println();
+        //System.out.println();
         System.out.println(A.foundCounter + " states expanded initially in AStar");
-        System.out.println(A.hitCounter + " states(hit) expanded initially in AStar");
-        System.out.println();
+        AStarTotalCycles += A.foundCounter;
+        //System.out.println(A.hitCounter + " states(hit) expanded initially in AStar");
+        //System.out.println();
+        
        // readPath();
         
         //PL is g*: the path of least cost from start to goal
         int pl = rects[size][size].pathLength;
+        
+        for(int i=0; i<=size; i++){
+            for(int j=0; j<=size; j++){
+                
+                rectsOrigin[i][j] = new Tile(rects[i][j].x, rects[i][j].y, rects[i][j].blocked, rects[i][j].found);
+                
+            }
+        }
      
+        
        
         int closedListCounter = 0;
         
@@ -133,11 +159,29 @@ public class Drawing extends PApplet{
         }  
         
         readPath();
-        System.out.println();
+        
+        
+        //System.out.println();
         System.out.println(A2.foundCounter + " states expanded in Adaptive A Star");
-        System.out.println(A2.hitCounter + " states(hit) expanded initially in AStar");
+        AdaptiveTotalCycles += A2.foundCounter;
+        //System.out.println(A2.hitCounter + " states(hit) expanded initially in AStar");
         
         
+        int cp = 0;
+        for(int i=0; i<=size; i++){
+            for(int j=0; j<=size; j++){
+                if(rectsOrigin[i][j].found && rects[i][j].found){
+                    //System.out.println("Tile x: "+ rects[i][j].x + " y: " + rects[i][j].y);
+                    cp++;
+                }
+            }
+        }
+        
+        
+        }
+        
+        System.out.println("\nAvg AStar Cycles : " + (AStarTotalCycles/44));
+        System.out.println("Avg Adaptive Cycles : " + (AdaptiveTotalCycles/44));
         
     }
 

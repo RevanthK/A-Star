@@ -168,7 +168,7 @@ public class AStar {
             //System.out.print("\n" + target.path);
             long endTime   = System.nanoTime();
             long totalTime = endTime - startTime;
-            System.out.println("Forward A Star: " + (totalTime/1000000000.0) + " seconds");
+            //System.out.println("Forward A Star: " + (totalTime/1000000000.0) + " seconds");
             writeToFile(target.path);
         } else {
             // blocked
