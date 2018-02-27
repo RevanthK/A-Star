@@ -14,8 +14,9 @@ public class Drawing extends PApplet{
     String fs = "RandomMaze";
     String fe = ".csv";
     int counter = 0;
-    
-    float AStarTotalTime = 0, AdaptiveTotalTime = 0;
+
+
+    static float AStarTotalTime = 0, AdaptiveTotalTime = 0;
     float AStarTotalCycles = 0, AdaptiveTotalCycles = 0;
     
 
@@ -30,7 +31,7 @@ public class Drawing extends PApplet{
         {
           for (int c=0; c<=size; c++) // columns per row
           {
-            if (table.getFloat(r, c) >= .9) {       
+            if (table.getFloat(r, c) >= .8) {       
               rects[c][r] = new Tile(c, r, true);
               //tq.push(rects[r][c]);
             } else
@@ -66,7 +67,7 @@ public class Drawing extends PApplet{
     public void setup(){
         int counter = 0;
         
-        while(counter < 50){
+        while(counter < 49){
             
             counter++;
         
@@ -102,7 +103,7 @@ public class Drawing extends PApplet{
         //System.out.println(A.hitCounter + " states(hit) expanded initially in AStar");
         //System.out.println();
         
-       // readPath();
+        //readPath();
         
         //PL is g*: the path of least cost from start to goal
         int pl = rects[size][size].pathLength;
@@ -117,7 +118,6 @@ public class Drawing extends PApplet{
      
         
        
-        int closedListCounter = 0;
         
         for(int i=0; i<=size; i++){
             for(int j=0; j<=size; j++){
@@ -126,7 +126,7 @@ public class Drawing extends PApplet{
 
                 //in the closed list, set h to g* - g(s)
                 if(rects[i][j].found == true){
-                    closedListCounter++;
+                    
                     rects[i][j].h = pl - rects[i][j].g;
                     
                 } 
@@ -159,8 +159,7 @@ public class Drawing extends PApplet{
         }  
         
         readPath();
-        
-        
+
         //System.out.println();
         System.out.println(A2.foundCounter + " states expanded in Adaptive A Star");
         AdaptiveTotalCycles += A2.foundCounter;
@@ -182,6 +181,9 @@ public class Drawing extends PApplet{
         
         System.out.println("\nAvg AStar Cycles : " + (AStarTotalCycles/44));
         System.out.println("Avg Adaptive Cycles : " + (AdaptiveTotalCycles/44));
+        
+        System.out.println("\nAvg AStar Time : " + (AStarTotalTime/44));
+        System.out.println("Avg Adaptive Time : " + (AdaptiveTotalTime/44));
         
     }
 

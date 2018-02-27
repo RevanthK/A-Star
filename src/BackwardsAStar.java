@@ -12,6 +12,7 @@ public class BackwardsAStar {
     //Queue<Tile> tq = new PriorityQueue<Tile>(); 
     
     String totalPathLength = "";
+    int foundCounter = 1;
     
     boolean empty = false;
     
@@ -59,6 +60,7 @@ public class BackwardsAStar {
                     tq.push(t);
                     //tq.add(t);
                     t.found = true;
+                    foundCounter++;
                 }
                 if (t.pathLength > start.pathLength+1) {
                     t.path = start.path + start.x + "," + start.y + "\n";
@@ -169,7 +171,8 @@ public class BackwardsAStar {
             //System.out.print("\n" + target.path);
             long endTime   = System.nanoTime();
             long totalTime = endTime - startTime;
-            System.out.println("Backwards A Star: " + (totalTime/1000000000.0) + " seconds");
+            Drawing.AStarTotalTime += totalTime/1000000000.0;
+            //System.out.println("Backwards A Star: " + (totalTime/1000000000.0) + " seconds");
             writeToFile(target.path);
         } else {
             // blocked
